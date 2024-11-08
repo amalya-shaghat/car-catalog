@@ -3,10 +3,11 @@
 namespace App\Services;
 
 use App\Models\Car;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class CarService
 {
-    public function getFilteredCars(array $filters)
+    public function getFilteredCars(array $filters): LengthAwarePaginator
     {
         $query = Car::query();
 
@@ -36,6 +37,14 @@ class CarService
 
         $perPage = $filters['per_page'] ?? 10;
 
-        return $query->paginate($perPage);
+        $cars = $query->paginate($perPage);
+
+        $cars->getCollection()->transform(function ($car) {
+            $car->image_url = asset('images/' . $car->image_path);
+            return $car;
+        });
+
+        return $cars;
     }
+
 }

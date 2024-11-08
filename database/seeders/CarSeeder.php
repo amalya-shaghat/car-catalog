@@ -11,6 +11,17 @@ class CarSeeder extends Seeder
     {
         Car::insert([
             [
+                'brand'       => 'Mercedes-Benz',
+                'model'       => 'CLS',
+                'year'        => 2022,
+                'price'       => 70000,
+                'engine_type' => 'бензин',
+                'drive_type'  => 'задний',
+                'images'      => json_encode(['cls_front.jpg', 'cls_side.jpg']),
+                'created_at'  => now(),
+                'updated_at'  => now(),
+            ],
+            [
                 'brand'       => 'Toyota',
                 'model'       => 'Camry',
                 'year'        => 2022,
@@ -45,12 +56,12 @@ class CarSeeder extends Seeder
             ],
             [
                 'brand'       => 'Chevrolet',
-                'model'       => 'Bolt EV',
+                'model'       => 'Volt EV',
                 'year'        => 2020,
                 'price'       => 37000,
                 'engine_type' => 'электричка',
                 'drive_type'  => 'передний',
-                'images'      => json_encode(['bolt_front.jpg', 'bolt_side.jpg']),
+                'images'      => json_encode(['volt_front.jpg', 'volt_side.jpg']),
                 'created_at'  => now(),
                 'updated_at'  => now(),
             ],

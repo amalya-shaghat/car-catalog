@@ -53,18 +53,32 @@
 
             <div class="flex items-center mb-4">
                 <label for="per_page" class="mr-2">Показать на странице:</label>
-                <select v-model="filters.per_page" @change="applyFilters" class="border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-indigo-200">
+                <select v-model.number="filters.per_page" @change="applyFilters" class="border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-indigo-200">
                     <option value="2" selected>2</option>
                     <option value="3">3</option>
                     <option value="5">5</option>
                 </select>
             </div>
 
-            <div v-for="car in cars.data" :key="car.id" class="car-card bg-white p-4 rounded-md shadow mb-4 border border-gray-100">
-                <h3 class="text-lg font-semibold">{{ car.brand }} {{ car.model }}</h3>
-                <p class="text-gray-600">Year: {{ car.year }}</p>
-                <p class="text-gray-600">Price: ${{ car.price }}</p>
+            <div class="container mx-auto p-4">
+                <div class="flex flex-col space-y-4">
+                    <div v-for="car in cars.data" :key="car.id" class="car-card bg-white p-4 rounded-md shadow border border-gray-100">
+                        <div class="flex flex-col md:flex-row">
+                            <div class="w-full md:w-1/2 p-2 flex justify-center" style="align-items: baseline">
+                                <img v-for="image in car.images" :key="image" :src="`/images/${image}`" alt="Car Image" class="w-full h-auto rounded-md mr-1" style="max-width: 150px" />
+                            </div>
+                            <div class="w-full md:w-1/2 p-2 flex flex-col justify-between">
+                                <h3 class="text-lg font-semibold mt-2 md:mt-0">{{ car.brand }} {{ car.model }}</h3>
+                                <p class="text-gray-600">Year: {{ car.year }}</p>
+                                <p class="text-gray-600">Price: ${{ car.price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+
 
             <div class="pagination flex justify-center items-center space-x-4 mt-4">
                 <button @click="prevPage" :disabled="!cars.meta || cars.meta.current_page === 1" class="px-4 py-2 rounded-md bg-indigo-500 text-white disabled:opacity-50">
@@ -105,7 +119,7 @@ export default {
                 year_max: 2023,
                 price_min: 1000,
                 price_max: 100000,
-                per_page: 10,
+                per_page: 2,
             },
             page: 1,
             yearRange: [2000, 2023],
