@@ -19,6 +19,12 @@
                     <select v-model="filters.brand" @change="applyFilters" class="border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-indigo-200">
                         <option value="">All</option>
                         <option value="Toyota">Toyota</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Ford">Ford</option>
+                        <option value="Chevrolet">Chevrolet</option>
+                        <option value="BMW">BMW</option>
+                        <option value="Audi">Audi</option>
+                        <option value="Mercedes">Mercedes</option>
                     </select>
                 </div>
 
@@ -54,9 +60,9 @@
             <div class="flex items-center mb-4">
                 <label for="per_page" class="mr-2">Показать на странице:</label>
                 <select v-model.number="filters.per_page" @change="applyFilters" class="border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-indigo-200">
-                    <option value="2" selected>2</option>
-                    <option value="3">3</option>
-                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
                 </select>
             </div>
 
@@ -71,15 +77,13 @@
                                 <h3 class="text-lg font-semibold mt-2 md:mt-0">{{ car.brand }} {{ car.model }}</h3>
                                 <p class="text-gray-600">Year: {{ car.year }}</p>
                                 <p class="text-gray-600">Price: ${{ car.price }}</p>
+                                <p class="text-gray-600">Engine Type: {{ car.engine_type }}</p>
+                                <p class="text-gray-600">Drive Type: {{ car.drive_type }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
             <div class="pagination flex justify-center items-center space-x-4 mt-4">
                 <button @click="prevPage" :disabled="!cars.meta || cars.meta.current_page === 1" class="px-4 py-2 rounded-md bg-indigo-500 text-white disabled:opacity-50">
                     Previous
@@ -119,7 +123,7 @@ export default {
                 year_max: 2023,
                 price_min: 1000,
                 price_max: 100000,
-                per_page: 2,
+                per_page: 10,
             },
             page: 1,
             yearRange: [2000, 2023],
